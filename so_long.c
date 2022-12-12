@@ -6,12 +6,13 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/06 18:48:03 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/09 13:23:43 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 #include <math.h>
+#include <stdio.h>
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -56,8 +57,6 @@ void drawCircle(int r, t_data img, int mx, int my, int color)
     }
 }
 
-#include <stdio.h>
-
 int	print_circles(int keycode, t_vars *vars)
 {
 	t_data	img;
@@ -70,7 +69,7 @@ int	print_circles(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		return (0);
 	}
-	else if (keycode == W)
+	else if (keycode == W || keycode == UP)
 		y -= 15;
 	else if (keycode == A)
 		x -= 15;
@@ -85,12 +84,31 @@ int	print_circles(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
+	int		i;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 960, 520, "Hello world!");
-	mlx_hook(vars.win, 2, 1L, print_circles, &vars);
-	mlx_loop(vars.mlx);
+	i = 0;
+	if (argc == 2)
+	{
+		if (makemap(&vars, argv[1]))
+		{
+			printf("Map error");
+			return (0);
+		}
+		printf("%s\n", vars.mapstr);
+		while (vars.y)
+		{
+			printf("%s\n", vars.map[i]);
+			i++;
+			vars.y--;
+		}
+		vars.mlx = mlx_init();
+		vars.win = mlx_new_window(vars.mlx, 960, 520, "Hello world!");
+		mlx_hook(vars.win, 2, 1L, print_circles, &vars);
+		mlx_loop(vars.mlx);
+		return (0);
+	}
+	return (-1);
 }
