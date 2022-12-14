@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/12 13:15:37 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/14 19:20:40 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <mlx.h>
 # include "libft/libft.h"
 
-typedef struct s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
@@ -25,18 +26,35 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
-typedef struct s_vars {
+typedef struct s_vars
+{
 	void	*mlx;
 	void	*win;
 	char	**map;
 	char	*mapstr;
-	size_t	x;
-	size_t	y;
+	int		col;
+	int		row;
 	int		collectible;
 	int		moves;
 }	t_vars;
 
-enum e_keys {
+typedef struct s_cell
+{
+	int	parent_col;
+	int	parent_row;
+	int	f;
+	int	g;
+	int	h;
+}	t_cell;
+
+typedef struct s_coords
+{
+	int	row;
+	int	col;
+}	t_coords;
+
+enum e_keys
+{
 	W = 13,
 	A = 0,
 	S = 1,

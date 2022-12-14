@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:09:28 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/12 17:33:14 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/14 19:20:33 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static int	check_walls(t_vars *vars)
 {
-	int	x;
-	int	y;
+	int	col;
+	int	row;
 
-	x = vars->x;
-	y = vars->y;
-	while (x > 0)
+	col = vars->col;
+	row = vars->col;
+	while (col > 0)
 	{
-		x--;
-		if (vars->map[0][x] != '1' || vars->map[y - 1][x] != '1')
+		col--;
+		if (vars->map[0][col] != '1' || vars->map[row - 1][col] != '1')
 			return (-1);
 	}
-	while (y > 0)
+	while (row > 0)
 	{
-		y--;
-		if (vars->map[y][0] != '1' || vars->map[y][vars->x - 1] != '1')
+		row--;
+		if (vars->map[row][0] != '1' || vars->map[row][vars->col - 1] != '1')
 			return (-1);
 	}
 	return (0);
@@ -62,25 +62,13 @@ static int	check_chars(t_vars *vars)
 	return (0);
 }
 
-int	check_path(t_vars *vars)
-{
-	
-
-}
-
 int	validate(t_vars *vars)
 {
 	if (check_walls(vars))
-	{
-		free(vars->map);
-		free(vars->mapstr);
 		return (-1);
-	}
 	if (check_chars(vars))
-	{
-		free(vars->map);
-		free(vars->mapstr);
-		return (0);
-	}
+		return (-1);
+	if (check_path(vars))
+		return (-1);
 	return (0);
 }

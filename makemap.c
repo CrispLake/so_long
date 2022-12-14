@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:39:34 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/12 13:16:26 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/14 18:53:19 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,10 @@ int	makemap(t_vars *vars, char *filename)
 	if (splitxy(vars->mapstr, '\n', vars))
 		return (-1);
 	if (validate(vars))
+	{
+		free(vars->map);
+		free(vars->mapstr);
 		return (-1);
+	}
 	return (0);
 }
