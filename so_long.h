@@ -6,13 +6,14 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/14 19:20:40 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/16 17:06:38 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # define BUFFER_SIZE 1024
+# define F_MAX 2147483647
 
 # include <mlx.h>
 # include "libft/libft.h"
@@ -32,16 +33,17 @@ typedef struct s_vars
 	void	*win;
 	char	**map;
 	char	*mapstr;
-	int		col;
 	int		row;
+	int		col;
 	int		collectible;
 	int		moves;
 }	t_vars;
 
 typedef struct s_cell
 {
-	int	parent_col;
+	int	closed;
 	int	parent_row;
+	int	parent_col;
 	int	f;
 	int	g;
 	int	h;
@@ -51,6 +53,9 @@ typedef struct s_coords
 {
 	int	row;
 	int	col;
+	int	f;
+	int	g;
+	int	h;
 }	t_coords;
 
 enum e_keys
@@ -69,5 +74,6 @@ enum e_keys
 int	makemap(t_vars *vars, char *filename);
 int	splitxy(char const *s, char c, t_vars *vars);
 int	validate(t_vars *vars);
+int	check_path(t_vars *vars);
 
 #endif

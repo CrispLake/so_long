@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/09 13:23:43 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/15 13:15:26 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,15 @@ int	main(int argc, char **argv)
 	{
 		if (makemap(&vars, argv[1]))
 		{
-			printf("Map error");
-			return (0);
+			printf("Map error\n");
+			return (-1);
 		}
 		printf("%s\n", vars.mapstr);
-		while (vars.y)
+		while (vars.row)
 		{
 			printf("%s\n", vars.map[i]);
 			i++;
-			vars.y--;
+			vars.row--;
 		}
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, 960, 520, "Hello world!");
@@ -110,5 +110,6 @@ int	main(int argc, char **argv)
 		mlx_loop(vars.mlx);
 		return (0);
 	}
+	printf("More or less than 1 map given\n");
 	return (-1);
 }

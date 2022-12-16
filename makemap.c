@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:39:34 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/14 18:53:19 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:32:43 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	maptostr(t_vars *vars, char *filename)
 		return (-1);
 	return (0);
 }
-
+#include <stdio.h>
 int	makemap(t_vars *vars, char *filename)
 {
 	char	*dot;

@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:10:03 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/12 13:02:29 by emajuri          ###   ########.fr       */
+/*   Updated: 2022/12/15 12:22:06 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static	int	ft_malloc_strings(char const *s, char c, t_vars *vars, size_t count)
 	i1 = 0;
 	i2 = 0;
 	while (s[i1] != c && s[i1++] != 0)
-			vars->x++;
+			vars->col++;
 	i1 = 0;
 	while (count-- > 0)
 	{
@@ -78,7 +78,7 @@ static	int	ft_malloc_strings(char const *s, char c, t_vars *vars, size_t count)
 		while (s[i1] != c && s[i1++] != 0)
 			count2++;
 		i1++;
-		if (vars->x == count2)
+		if (vars->col == (int)count2)
 			vars->map[i2] = malloc((count2 + 1) * sizeof(char));
 		else
 			vars->map[i2] = NULL;
@@ -96,12 +96,12 @@ int	splitxy(char const *s, char c, t_vars *vars)
 	i = 0;
 	if (!s)
 		return (-1);
-	vars->y = ft_word_count(s, c);
-	vars->x = 0;
-	vars->map = malloc(vars->y * sizeof(char *));
+	vars->row = ft_word_count(s, c);
+	vars->col = 0;
+	vars->map = malloc(vars->row * sizeof(char *));
 	if (!vars->map)
 		return (-1);
-	if (ft_malloc_strings(s, c, vars, vars->y))
+	if (ft_malloc_strings(s, c, vars, vars->row))
 	{
 		while (vars->map[i])
 			free(vars->map[i++]);
