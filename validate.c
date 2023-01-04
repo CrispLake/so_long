@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:09:28 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/16 17:06:46 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/04 17:47:24 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	check_walls(t_vars *vars)
 
 static int	check_chars(t_vars *vars, int i, int exit, int player)
 {
-	int space;
+	int	space;
 
 	space = 0;
 	vars->collectible = 0;
@@ -50,12 +50,11 @@ static int	check_chars(t_vars *vars, int i, int exit, int player)
 			player++;
 		else if (vars->mapstr[i] == '0')
 			space++;
-		else if (vars->mapstr[i] != '1' && vars->mapstr[i] != '0' &&
-				vars->mapstr[i] != '\n')
+		else if (vars->mapstr[i] != '1' && vars->mapstr[i] != '\n')
 			return (-1);
 		i++;
 	}
-	if (player != 1 || exit != 1 || vars->collectible < 1 || space < 0)
+	if (player != 1 || exit != 1 || vars->collectible < 1 || space < 1)
 		return (-1);
 	return (0);
 }

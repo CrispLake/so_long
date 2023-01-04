@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/16 17:06:38 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/04 17:48:00 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ typedef struct s_vars
 typedef struct s_cell
 {
 	int	closed;
-	int	parent_row;
-	int	parent_col;
 	int	f;
 	int	g;
 	int	h;
@@ -53,9 +51,9 @@ typedef struct s_coords
 {
 	int	row;
 	int	col;
+	int	endr;
+	int	endc;
 	int	f;
-	int	g;
-	int	h;
 }	t_coords;
 
 enum e_keys
@@ -71,9 +69,24 @@ enum e_keys
 	RIGHT = 124
 };
 
-int	makemap(t_vars *vars, char *filename);
-int	splitxy(char const *s, char c, t_vars *vars);
-int	validate(t_vars *vars);
-int	check_path(t_vars *vars);
+int		makemap(t_vars *vars, char *filename);
+int		splitxy(char const *s, char c, t_vars *vars);
+int		validate(t_vars *vars);
+int		check_path(t_vars *vars);
+int		successor_north(t_vars *vars, t_coords *coords, t_list **head, \
+		t_cell **cell_details);
+int		successor_south(t_vars *vars, t_coords *coords, t_list **head, \
+		t_cell **cell_details);
+int		successor_west(t_vars *vars, t_coords *coords, t_list **head, \
+		t_cell **cell_details);
+int		successor_east(t_vars *vars, t_coords *coords, t_list **head, \
+		t_cell **cell_details);
+int		add_node(t_list **head, int f, int row, int col);
+int		is_valid(t_vars *vars, int row, int col);
+int		create_open_list(t_list **head, int f, t_coords *own);
+int		create_open_list(t_list **head, int f, t_coords *own);
+int		add_node(t_list **head, int f, int row, int col);
+t_cell	**create_2d_cells(t_vars *vars);
+void	free_coords(void *own);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2022/12/15 13:15:26 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/04 16:48:42 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,12 @@ int	main(int argc, char **argv)
 			i++;
 			vars.row--;
 		}
+/*
 		vars.mlx = mlx_init();
 		vars.win = mlx_new_window(vars.mlx, 960, 520, "Hello world!");
 		mlx_hook(vars.win, 2, 1L, print_circles, &vars);
-		mlx_loop(vars.mlx);
+		mlx_loop(vars.mlx);*/
+		printf("Bye!");
 		return (0);
 	}
 	printf("More or less than 1 map given\n");
