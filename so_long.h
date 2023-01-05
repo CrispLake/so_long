@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/04 17:48:00 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/05 17:20:22 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	void	*img;
+	int		x;
+	int		y;
 	char	**map;
 	char	*mapstr;
 	int		row;
@@ -86,6 +89,10 @@ int		is_valid(t_vars *vars, int row, int col);
 int		create_open_list(t_list **head, int f, t_coords *own);
 int		create_open_list(t_list **head, int f, t_coords *own);
 int		add_node(t_list **head, int f, int row, int col);
+int		free_struct(t_coords **new);
+int		create_coords(t_coords *end, t_coords **coords);
+void	free_all(t_vars *vars, t_cell **cell_details, t_list *head, \
+		t_coords *coords);
 t_cell	**create_2d_cells(t_vars *vars);
 void	free_coords(void *own);
 

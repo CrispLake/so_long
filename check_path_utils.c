@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 16:14:32 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/04 17:50:22 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/05 13:16:42 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,10 @@ int	create_open_list(t_list **head, int f, t_coords *own)
 	new->f = f;
 	*head = ft_lstnew(new);
 	if (!*head)
+	{
+		free(new);
 		return (-1);
+	}
 	return (0);
 }
 
