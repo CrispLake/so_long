@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/05 17:20:22 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/09 19:46:55 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,29 @@
 # include <mlx.h>
 # include "libft/libft.h"
 
-typedef struct s_data
+typedef struct s_coords
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+	int	row;
+	int	col;
+	int	endr;
+	int	endc;
+	int	f;
+}	t_coords;
 
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		x;
-	int		y;
-	char	**map;
-	char	*mapstr;
-	int		row;
-	int		col;
-	int		collectible;
-	int		moves;
+	void		*mlx;
+	void		*win;
+	void		**imgs;
+	int			x;
+	int			y;
+	char		**map;
+	char		*mapstr;
+	int			row;
+	int			col;
+	int			collectible;
+	int			move_count;
+	t_coords	*player;
 }	t_vars;
 
 typedef struct s_cell
@@ -49,15 +50,6 @@ typedef struct s_cell
 	int	g;
 	int	h;
 }	t_cell;
-
-typedef struct s_coords
-{
-	int	row;
-	int	col;
-	int	endr;
-	int	endc;
-	int	f;
-}	t_coords;
 
 enum e_keys
 {
@@ -70,6 +62,29 @@ enum e_keys
 	LEFT = 123,
 	DOWN = 125,
 	RIGHT = 124
+};
+
+enum e_chars
+{
+	SPACE = '0',
+	WALL = '1',
+	COIN = 'C',
+	DOOR0 = 'E',
+	DOOR1 = 'O',
+	DOOR2 = '2',
+	PLAYER = 'P'
+};
+
+enum e_images
+{
+	SPACE_IMG = 0,
+	WALL_IMG = 1,
+	COIN_IMG = 2,
+	PLAYER_IMG = 3,
+	DOOR0_IMG = 4,
+	DOOR1_IMG = 5,
+	DOOR2_IMG = 6,
+	DOOR3_IMG = 7
 };
 
 int		makemap(t_vars *vars, char *filename);
