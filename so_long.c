@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/09 19:46:53 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/10 17:09:13 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,16 +93,99 @@ void	move_player(int keycode, t_vars *vars)
 		(*row)++;
 	else if (keycode == D || keycode == RIGHT)
 		(*col)++;
-	if ((vars->map)[*row][*col] != DOOR0)
+	if ((vars->map)[*row][*col] == SPACE || (vars->map)[*row][*col] == COIN)
 		(vars->map)[*row][*col] = PLAYER;
-	else
+	else if ((vars->map)[*row][*col] == DOOR0)
 		(vars->map)[*row][*col] = DOOR2;
+	else
+		(vars->map)[*row][*col] = DOOR3;
 }
 
-void	win(int move_count, t_vars *vars)
+void	put_image(t_vars *vars, int row, int col)
 {
-	printf("YOU WON!\n\nMOVES USED: %i\n", move_count);
-	destroy_all(vars);
+	int	i;
+	char c;
+
+	c = (vars->map)[row][col];
+	if (c == SPACE)
+		i = SPACE_IMG;
+	else if (c == WALL)
+		i = WALL_IMG;
+	else if (c == COIN)
+		i = COIN_IMG;
+	else if (c == PLAYER)
+		i = PLAYER_IMG;
+	else if (c == DOOR0)
+		i = DOOR0_IMG;
+	else if (c == DOOR1)
+		i = DOOR1_IMG;
+	else if (c == DOOR2)
+		i = DOOR2_IMG;
+	else
+		i = DOOR3_IMG;
+	mlx_put_image_to_window(vars->mlx, vars->win, (vars->imgs)[i], vars->x * 128, vars->y * 128);
+}
+
+void	set_row_col(t_vars *vars, int *row, int *col)
+{
+	if (vars->row > 9)
+	{
+		*row = (vars->player)->row;
+		while (*row < 8)
+			(*row)++;
+		while (*row < (vars->player)->row + 4 && *row < vars->row - 1)
+			(*row)++;
+	}
+	else
+		*row = vars->row - 1;
+	if (vars->col > 9)
+	{
+		*col = (vars->player)->col;
+		while (*col < 8)
+			(*col)++;
+		while (*col < (vars->player)->col + 4 && *col < vars->col - 1)
+			(*col)++;
+	}
+	else
+		*col = vars->col - 1;
+}
+
+void	set_xy(t_vars *vars)
+{
+	if (vars->row > 9)
+		vars->y = 8;
+	else
+		vars->y = vars->row - 1;
+	if (vars->col > 9)
+		vars->x = 8;
+	else
+		vars->x = vars->col - 1;
+}
+
+void	display_map(t_vars *vars)
+{
+	int	row;
+	int	col;
+	int	colsave;
+	int	xsave;
+
+	set_row_col(vars, &row, &col);
+	set_xy(vars);
+	xsave = vars->x;
+	colsave = col;
+	while (vars->y >= 0)
+	{
+		vars->x = xsave;
+		col = colsave;
+		while (vars->x >= 0)
+		{
+			put_image(vars, row, col);
+			(vars->x)--;
+			col--;
+		}
+		(vars->y)--;
+		row--;
+	}
 }
 
 void	print_map(t_vars *vars)
@@ -118,6 +201,16 @@ void	print_map(t_vars *vars)
 		i++;
 		row--;
 	}
+}
+
+int	win(int move_count, t_vars *vars, int keycode)
+{
+	move_player(keycode, vars);
+	print_map(vars); // extra
+	display_map(vars);
+	vars->collectible = -2;
+	printf("YOU WON!\n\nMOVES USED: %i\n", move_count);
+	return (0);
 }
 
 void	open_door(t_vars *vars)
@@ -141,49 +234,6 @@ void	open_door(t_vars *vars)
 	vars->collectible--;
 }
 
-void	put_image(t_vars *vars, int row, int col)
-{
-	int	i;
-	char c;
-
-	c = (vars->map)[row][col];
-	if (c == SPACE)
-		i = SPACE_IMG;
-	else if (c == WALL)
-		i = WALL_IMG;
-	else if (c == COIN)
-		i = COIN_IMG;
-	else if (c == PLAYER)
-		i = PLAYER_IMG;
-	else if (c == DOOR0)
-		i = DOOR0_IMG;
-	else if (c == DOOR1)
-		i = DOOR1_IMG;
-	else
-		i = DOOR2_IMG;
-	col *= 32;
-	row *= 32;
-	mlx_put_image_to_window(vars->mlx, vars->win, (vars->imgs)[i], col, row);
-}
-
-void	display_map(t_vars *vars)
-{
-	int	row;
-	int	col;
-
-	row = vars->row;
-	col = vars->col;
-	if (row <= 9 && col <= 9)
-	{
-		while (row--)
-		{
-			col = vars->col;
-			while (col--)
-				put_image(vars, row, col);
-		}
-	}
-}
-
 int	movement(int keycode, t_vars *vars)
 {
 	int	move;
@@ -203,7 +253,7 @@ int	movement(int keycode, t_vars *vars)
 	else if (move == DOOR0)
 		move_player(keycode, vars);
 	else if (move == DOOR1)
-			win(vars->move_count, vars);
+			return (win(vars->move_count, vars, keycode));
 	if (!vars->collectible)
 		open_door(vars);
 	vars->move_count++;
@@ -240,9 +290,18 @@ int create_images(t_vars *vars)
 	return (0);
 }
 
+int	check_win(t_vars *vars)
+{
+	if (vars->collectible == -2)
+		destroy_all(vars);
+	return (0);
+}
+
 void	game(t_vars *vars)
 {
 	t_coords	player;
+	int			x;
+	int			y;
 
 	vars->mlx = mlx_init();
 	if (create_images(vars))
@@ -251,13 +310,17 @@ void	game(t_vars *vars)
 	print_map(vars); //extra
 	vars->move_count = 0;
 	vars->player = &player;
-	if (vars->row < 9 && vars->col < 9)
-		vars->win = mlx_new_window(vars->mlx, vars->col * 32, vars->row * 32, "./so_long");
-	else
-		vars->win = mlx_new_window(vars->mlx, 288, 288, "./so_long");
+	x = vars->col;
+	y = vars->row;
+	if (x > 9)
+		x = 9;
+	if (y > 9)
+		y = 9;
+	vars->win = mlx_new_window(vars->mlx, x * 128, y * 128, "./so_long");
 	display_map(vars);
 	mlx_hook(vars->win, 17, 0, destroy_all, vars);
 	mlx_key_hook(vars->win, movement, vars);
+	mlx_loop_hook(vars->mlx, check_win, vars);
 	mlx_loop(vars->mlx);
 }
 
