@@ -6,7 +6,7 @@
 #    By: emajuri <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:39:22 by emajuri           #+#    #+#              #
-#    Updated: 2023/01/05 14:46:09 by emajuri          ###   ########.fr        #
+#    Updated: 2023/01/11 18:03:10 by emajuri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ NAME = so_long
 LIBFT = libft.a
 
 SRC = so_long.c makemap.c splitxy.c validate.c check_path.c check_path_utils.c \
-	  a_star_successors.c check_path_utils2.c
+	  a_star_successors.c check_path_utils2.c movement.c image_functions.c
 
 OSRC = $(SRC:%.c=%.o)
 
-WWW = -Wall -Wextra -Werror -g3
+WWW = -Wall -Wextra -Werror
 
 .PHONY: all clean fclean re
 

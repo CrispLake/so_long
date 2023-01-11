@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 16:49:48 by emajuri           #+#    #+#             */
-/*   Updated: 2022/11/23 15:18:53 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:10:43 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ char	*ft_strrev(char *src);
 char	*ft_ulltoa_base(unsigned long long n, int base);
 void	ft_putnbr_base_fd(int n, int base, int fd);
 void	ft_putull_base_fd(unsigned long long n, int base, int fd);
+int		ft_printf(const char *str, ...);
 
 #endif

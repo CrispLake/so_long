@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 18:32:26 by emajuri           #+#    #+#             */
-/*   Updated: 2022/11/07 21:07:34 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/05 14:18:47 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (!lst || !del)
 		return ;
 	del(lst->content);
+	lst->next = NULL;
 	free(lst);
 	lst = NULL;
 }

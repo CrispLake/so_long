@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/10 17:35:54 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/11 15:03:55 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <mlx.h>
 # include "libft/libft.h"
+# include "stdio.h"
 
 typedef struct s_coords
 {
@@ -103,13 +104,18 @@ int		successor_east(t_vars *vars, t_coords *coords, t_list **head, \
 int		add_node(t_list **head, int f, int row, int col);
 int		is_valid(t_vars *vars, int row, int col);
 int		create_open_list(t_list **head, int f, t_coords *own);
-int		create_open_list(t_list **head, int f, t_coords *own);
-int		add_node(t_list **head, int f, int row, int col);
 int		free_struct(t_coords **new);
 int		create_coords(t_coords *end, t_coords **coords);
+int		create_images(t_vars *vars);
+int		win(int move_count, t_vars *vars, int keycode);
+int		destroy_all(t_vars *vars);
+int		movement(int keycode, t_vars *vars);
+void	display_map(t_vars *vars);
+void	free_coords(void *own);
+void	get_player(t_vars *vars, t_coords *player);
+void	move_player(int keycode, t_vars *vars);
 void	free_all(t_vars *vars, t_cell **cell_details, t_list *head, \
 		t_coords *coords);
 t_cell	**create_2d_cells(t_vars *vars);
-void	free_coords(void *own);
 
 #endif
