@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 18:01:13 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/11 18:10:47 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	destroy_all(t_vars *vars)
 {
 	int	i;
 
-	i = 7;
+	i = 8;
 	while (vars->row--)
 		free(vars->map[vars->row]);
 	free(vars->map);
