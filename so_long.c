@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 13:17:57 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/11 13:28:33 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,25 +188,9 @@ void	display_map(t_vars *vars)
 	}
 }
 
-void	print_map(t_vars *vars)
-{
-	int i;
-	int row;
-
-	row = vars->row;
-	i = 0;
-	while (row)
-	{
-		printf("%s\n", vars->map[i]);
-		i++;
-		row--;
-	}
-}
-
 int	win(int move_count, t_vars *vars, int keycode)
 {
 	move_player(keycode, vars);
-	print_map(vars); // extra
 	display_map(vars);
 	vars->collectible = -2;
 	printf("YOU WON!\n\nMOVES USED: %i\n", move_count);
@@ -258,7 +242,6 @@ int	movement(int keycode, t_vars *vars)
 		open_door(vars);
 	vars->move_count++;
 	printf("MOVES: %i\n", vars->move_count);
-	print_map(vars); // extra
 	display_map(vars);
 	return (0);
 }
@@ -307,7 +290,6 @@ void	game(t_vars *vars)
 	if (create_images(vars))
 		return ;
 	get_player(vars, &player);
-	print_map(vars); //extra
 	vars->move_count = 0;
 	vars->player = &player;
 	x = vars->col;
