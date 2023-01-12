@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:40:40 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 17:33:19 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 19:03:37 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,9 @@ int	valid_move(t_vars *vars, int move)
 		return (COIN);
 	else if ((vars->map)[row][col] == DOOR0)
 		return (DOOR0);
-	return (DOOR1);
+	else if ((vars->map)[row][col] == DOOR1)
+		return (DOOR1);
+	return (0);
 }
 
 void	move_player(int keycode, t_vars *vars)
@@ -110,7 +112,7 @@ int	movement(int keycode, t_vars *vars)
 	if (keycode == ESC)
 		destroy_all(vars);
 	move = valid_move(vars, keycode);
-	if (move == WALL)
+	if (move == WALL || move == 0)
 		return (0);
 	else if (move == SPACE)
 		move_player(keycode, vars);
