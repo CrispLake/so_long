@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 16:10:03 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/06 15:38:09 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:27:04 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	splitxy(char const *s, char c, t_vars *vars)
 		return (-1);
 	if (ft_malloc_strings(s, c, vars, vars->row))
 	{
+		ft_printf("Error\nLines are not the same length\n");
 		while (vars->map[i])
 			free(vars->map[i++]);
 		free(vars->map);

@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 11:09:28 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/04 17:47:24 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:47:50 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,19 @@ static int	check_chars(t_vars *vars, int i, int exit, int player)
 int	validate(t_vars *vars)
 {
 	if (check_walls(vars))
+	{
+		ft_printf("Error\nMap has to be closed by walls\n");
 		return (-1);
+	}
 	if (check_chars(vars, 0, 0, 0))
+	{
+		ft_printf("Error\nMap has invalid characters\n");
 		return (-1);
+	}
 	if (check_path(vars))
+	{
+		ft_printf("Error\nMap doesn't have path to all collectibles/exit\n");
 		return (-1);
+	}
 	return (0);
 }

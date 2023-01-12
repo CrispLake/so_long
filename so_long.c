@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:47 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:13:10 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	game(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (create_images(vars))
 	{
-		ft_printf("Game error\n");
+		ft_printf("Error\nGame error\n");
 		destroy_all(vars);
 	}
 	get_player(vars, &player);
@@ -84,12 +84,9 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (makemap(&vars, argv[1]))
-		{
-			ft_printf("Map error\n");
 			return (-1);
-		}
 		game(&vars);
 	}
-	ft_printf("More or less than 1 map given\n");
+	ft_printf("Error\nMore or less than 1 map given\n");
 	return (-1);
 }

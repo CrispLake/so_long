@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 12:28:04 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/10 17:36:23 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 14:18:35 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	successors(t_vars *vars, t_cell **cell_details, t_list **head, \
 		return (0);
 	else if (x == -1)
 		return (-1);
-	return (0);
+	return (1);
 }
 
 int	search(t_vars *vars, t_cell **cell_details, t_list *head, t_coords *end)

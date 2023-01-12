@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:39:34 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/06 15:38:00 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/12 13:57:17 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	maptostr(t_vars *vars, char *filename)
 	readval = 1;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (-1);
+		return (-2);
 	while (readval)
 	{
 		buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -66,17 +66,29 @@ static int	maptostr(t_vars *vars, char *filename)
 	return (0);
 }
 
+int	print_error(void)
+{
+	ft_printf("Error\nInvalid filename\n");
+	return (-1);
+}
+
 int	makemap(t_vars *vars, char *filename)
 {
 	char	*dot;
 
 	dot = ft_strrchr(filename, '.');
 	if (!dot)
-		return (-1);
+		return (print_error());
 	if (ft_strncmp(dot, ".ber", 5))
+	{
+		ft_printf("Error\nMap's suffix is incorrect\n");
 		return (-1);
+	}
 	if (maptostr(vars, filename))
+	{
+		ft_printf("Error\nInvalid filename/Permission denied\n");
 		return (-1);
+	}
 	if (splitxy(vars->mapstr, '\n', vars))
 		return (-1);
 	if (validate(vars))
