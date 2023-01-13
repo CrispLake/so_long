@@ -6,7 +6,7 @@
 #    By: emajuri <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 16:39:22 by emajuri           #+#    #+#              #
-#    Updated: 2023/01/12 13:32:27 by emajuri          ###   ########.fr        #
+#    Updated: 2023/01/13 15:11:27 by emajuri          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = so_long.c makemap.c splitxy.c validate.c check_path.c check_path_utils.c \
 
 OSRC = $(SRC:%.c=%.o)
 
-WWW = -Wall -Wextra -Werror -g
+WWW = -Wall -Wextra -Werror
 
 .PHONY: all clean fclean re
 
