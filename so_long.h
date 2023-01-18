@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 15:03:55 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/01/18 14:48:44 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 
 # include <mlx.h>
 # include "libft/libft.h"
-# include "stdio.h"
 
 typedef struct s_coords
 {
