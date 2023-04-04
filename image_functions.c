@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 13:55:00 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/11 17:21:12 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/04/04 14:59:22 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,7 @@ int	create_images(t_vars *vars)
 			"./images/door2.xpm", &x, &y);
 	vars->imgs[DOOR3_IMG] = mlx_xpm_file_to_image(vars->mlx, \
 			"./images/door3.xpm", &x, &y);
+	if (check_error(vars))
+		return (-1);
 	return (0);
 }

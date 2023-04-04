@@ -6,11 +6,12 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 13:18:48 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/12 13:13:10 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/04/04 15:14:28 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "libft/libft.h"
 
 int	destroy_all(t_vars *vars)
 {
@@ -24,10 +25,14 @@ int	destroy_all(t_vars *vars)
 	if (vars->imgs != NULL)
 	{
 		while (i--)
-			mlx_destroy_image(vars->mlx, vars->imgs[i]);
+		{
+			if (vars->imgs[i])
+				mlx_destroy_image(vars->mlx, vars->imgs[i]);
+		}
 		free(vars->imgs);
 	}
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
 	exit(0);
 }
 
@@ -83,6 +88,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
+		ft_bzero(&vars, sizeof(t_vars));
 		if (makemap(&vars, argv[1]))
 			return (-1);
 		game(&vars);

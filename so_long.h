@@ -6,7 +6,7 @@
 /*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:28:51 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/18 14:48:44 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/04/04 15:04:18 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ void	move_player(int keycode, t_vars *vars);
 void	free_all(t_vars *vars, t_cell **cell_details, t_list *head, \
 		t_coords *coords);
 t_cell	**create_2d_cells(t_vars *vars);
+int		check_error(t_vars *vars);
 
 #endif
