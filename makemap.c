@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   makemap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emajuri <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: emajuri <emajuri@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 15:39:34 by emajuri           #+#    #+#             */
-/*   Updated: 2023/01/12 13:57:17 by emajuri          ###   ########.fr       */
+/*   Updated: 2023/12/15 14:49:29 by emajuri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	maptostr(t_vars *vars, char *filename)
 {
 	int		fd;
 	long	readval;
-	char	*buffer;
+	char	buffer[BUFFER_SIZE];
 	size_t	len;
 
 	len = 0;
@@ -51,14 +51,10 @@ static int	maptostr(t_vars *vars, char *filename)
 		return (-2);
 	while (readval)
 	{
-		buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-		if (!buffer)
-			return (-1);
 		readval = read(fd, buffer, BUFFER_SIZE);
 		if (readval < 0)
 			return (-1);
 		len += readval;
-		free(buffer);
 	}
 	close(fd);
 	if (makestr(vars, filename, len))
